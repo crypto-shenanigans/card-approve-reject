@@ -8,6 +8,7 @@ SAMPLE_DATA = {
 			img: "https://picsum.photos/200/300",
 			subbed: false,
 			locked: false,
+			classification: "approved"
 		},
 		{
 			id: 2,
@@ -15,6 +16,7 @@ SAMPLE_DATA = {
 			img: "https://picsum.photos/200/300",
 			subbed: false,
 			locked: true,
+			classification: "rejected"
 		},
 		{
 			id: 3,
@@ -22,6 +24,7 @@ SAMPLE_DATA = {
 			img: "https://picsum.photos/200/300",
 			subbed: true,
 			locked: false,
+			classification: "pending"
 		},
 		{
 			id: 4,
@@ -29,41 +32,89 @@ SAMPLE_DATA = {
 			img: "https://picsum.photos/200/300",
 			subbed: true,
 			locked: true,
+			classification: "approved"
 		},
 	],
 };
 
-function loadAssets() {
-	const cardContainer = document.getElementById("card-container");
-	cardContainer.innerHTML = "";
-	SAMPLE_DATA.cards.forEach((card) => {
-		const cardDiv = document.createElement("div");
-		cardDiv.classList.add("card");
+const cardContainer = document.getElementById("card-container");
+const pendingTab = document.getElementById("pending-tab");
+const acceptedTab = document.getElementById("accepted-tab");
+const rejectedTab = document.getElementById("rejected-tab");
 
-		const img = document.createElement("img");
-		img.src = card.img;
-		img.alt = card.asset;
+let activeFilter = null;
 
-		const cardContentDiv = document.createElement("div");
-		cardContentDiv.classList.add("card-content");
+function createCard(card) {
+	const cardDiv = document.createElement("div");
+	cardDiv.classList.add("card");
 
-		const h3 = document.createElement("h3");
-		h3.textContent = card.asset;
+	const img = document.createElement("img");
+	img.src = card.img;
+	img.alt = card.asset;
 
-		const p = document.createElement("p");
-		p.textContent = card.subbed ? "Subscribed" : "Not Subscribed";
+	const cardContentDiv = document.createElement("div");
+	cardContentDiv.classList.add("card-content");
 
-		const p2 = document.createElement("p");
-		p2.textContent = card.locked ? "Locked" : "Unlocked";
+	const h3 = document.createElement("h3");
+	h3.textContent = card.asset;
 
-		cardContentDiv.appendChild(h3);
-		cardContentDiv.appendChild(p);
-		cardContentDiv.appendChild(p2);
+	const p = document.createElement("p");
+	p.textContent = card.subbed ? "Subscribed" : "Not Subscribed";
 
-		cardDiv.appendChild(img);
-		cardDiv.appendChild(cardContentDiv);
-		cardContainer.appendChild(cardDiv);
-	});
+	const p2 = document.createElement("p");
+	p2.textContent = card.locked ? "Locked" : "Unlocked";
+
+	cardContentDiv.appendChild(h3);
+	cardContentDiv.appendChild(p);
+	cardContentDiv.appendChild(p2);
+
+	cardDiv.appendChild(img);
+	cardDiv.appendChild(cardContentDiv);
+	cardContainer.appendChild(cardDiv);
 }
 
+function loadAssets() {
+    cardContainer.innerHTML = "";
+
+    SAMPLE_DATA.cards.forEach((card) => {
+        if (!activeFilter || card.classification === activeFilter) {
+            createCard(card);
+        }
+    });
+}
+
+// Function to toggle the active filter state
+function toggleActiveFilter(tab, filter) {
+	if (activeFilter === filter) {
+		activeFilter = null; // Remove the active filter
+		tab.classList.remove("active");
+	} else {
+		activeFilter = filter; // Set the active filter
+	}
+}
+
+function changeActiveTab(activeTab, filter) {
+	const tabs = document.querySelectorAll("#tabs-container button");
+	for (let i = 0; i < tabs.length; i++) {
+		tabs[i].classList.remove("active");
+	}
+	activeTab.classList.add("active");
+	toggleActiveFilter(activeTab, filter);
+	loadAssets(activeFilter); // Load assets with the active filter
+}
+
+// Add event listeners to tabs
+pendingTab.addEventListener("click", () => {
+	changeActiveTab(pendingTab, "pending");
+});
+
+acceptedTab.addEventListener("click", () => {
+	changeActiveTab(acceptedTab, "approved");
+});
+
+rejectedTab.addEventListener("click", () => {
+	changeActiveTab(rejectedTab, "rejected");
+});
+
+// Initially load all cards
 loadAssets();

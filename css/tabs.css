@@ -1,0 +1,22 @@
+#tabs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem;
+    gap: 1rem;
+}
+
+#tabs-container > button {
+    background: var(--background-secondary);
+    padding: 1rem 0.75rem;
+    border: none;
+    border-radius: 4px;    
+}
+
+#tabs-container > button:hover {
+    background: var(--highlight);
+}
+
+#tabs-container > .active {
+    background: var(--highlight);
+}

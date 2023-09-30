@@ -1,6 +1,8 @@
 :root {
     /* CSS Variables */
     --background: #121212;
+    --background-secondary: #1d1d1d;
+    --highlight: #1db954;
     --text: #fff;
 }
 
