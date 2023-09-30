@@ -39,16 +39,29 @@ function loadAssets() {
 	SAMPLE_DATA.cards.forEach((card) => {
 		const cardDiv = document.createElement("div");
 		cardDiv.classList.add("card");
-		cardDiv.innerHTML = `
-            <img src="${card.img}" alt="${card.asset}" />
-            <div class="card-content">
-                <h3>${card.asset}</h3>
-                <p>${card.subbed ? "Subscribed" : "Not Subscribed"}</p>
-                <button class="btn btn-${card.subbed ? "danger" : "success"}">${
-			card.subbed ? "Unsubscribe" : "Subscribe"
-		}</button>
-            </div>
-        `;
+
+		const img = document.createElement("img");
+		img.src = card.img;
+		img.alt = card.asset;
+
+		const cardContentDiv = document.createElement("div");
+		cardContentDiv.classList.add("card-content");
+
+		const h3 = document.createElement("h3");
+		h3.textContent = card.asset;
+
+		const p = document.createElement("p");
+		p.textContent = card.subbed ? "Subscribed" : "Not Subscribed";
+
+		const p2 = document.createElement("p");
+		p2.textContent = card.locked ? "Locked" : "Unlocked";
+
+		cardContentDiv.appendChild(h3);
+		cardContentDiv.appendChild(p);
+		cardContentDiv.appendChild(p2);
+
+		cardDiv.appendChild(img);
+		cardDiv.appendChild(cardContentDiv);
 		cardContainer.appendChild(cardDiv);
 	});
 }
