@@ -5,32 +5,36 @@ SAMPLE_DATA = {
 		{
 			id: 1,
 			asset: "asset 1",
+			number: 1,
 			img: "https://picsum.photos/200/300",
-			subbed: false,
+			submitted_date: "06-02-2021",
 			locked: false,
 			classification: "approved"
 		},
 		{
 			id: 2,
 			asset: "asset 2",
+			number: 20,
 			img: "https://picsum.photos/200/300",
-			subbed: false,
+			submitted_date: "02-02-2021",
 			locked: true,
 			classification: "rejected"
 		},
 		{
 			id: 3,
 			asset: "asset 3",
+			number: 300,
 			img: "https://picsum.photos/200/300",
-			subbed: true,
+			submitted_date: "03-02-2021",
 			locked: false,
 			classification: "pending"
 		},
 		{
 			id: 4,
 			asset: "asset 4",
+			number: 4000,
 			img: "https://picsum.photos/200/300",
-			subbed: true,
+			submitted_date: "04-02-2021",
 			locked: true,
 			classification: "approved"
 		},
@@ -64,18 +68,22 @@ function createCard(card) {
 		window.open(`https://xchain.io/asset/${card.asset}`);
 	});
 
+	const asset_number = document.createElement("p");
+	asset_number.textContent = "asset number: " + card.number;
+
 	const p = document.createElement("p");
-	p.textContent = card.subbed ? "Subscribed" : "Not Subscribed";
+	p.textContent = "subbed date: " + card.submitted_date;
 
 	const p2 = document.createElement("p");
 	p2.textContent = card.locked ? "Locked" : "Unlocked";
 
 	cardContentDiv.appendChild(asset);
 	cardContentDiv.appendChild(hr);
+	cardContentDiv.appendChild(asset_number);
+	cardContentDiv.appendChild(hr.cloneNode());
 	cardContentDiv.appendChild(p);
 	cardContentDiv.appendChild(hr.cloneNode());
 	cardContentDiv.appendChild(p2);
-	cardContentDiv.appendChild(hr.cloneNode());
 
 	cardDiv.appendChild(img);
 	cardDiv.appendChild(cardContentDiv);
