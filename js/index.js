@@ -45,6 +45,8 @@ const rejectedTab = document.getElementById("rejected-tab");
 let activeFilter = null;
 
 function createCard(card) {
+	const hr = document.createElement("hr");``
+
 	const cardDiv = document.createElement("div");
 	cardDiv.classList.add("card");
 
@@ -55,8 +57,12 @@ function createCard(card) {
 	const cardContentDiv = document.createElement("div");
 	cardContentDiv.classList.add("card-content");
 
-	const h3 = document.createElement("h3");
-	h3.textContent = card.asset;
+	const asset = document.createElement("div");
+	asset.textContent = card.asset;
+	// have the h3 link to https://xchain.io/asset/{asset}
+	asset.addEventListener("click", () => {
+		window.open(`https://xchain.io/asset/${card.asset}`);
+	});
 
 	const p = document.createElement("p");
 	p.textContent = card.subbed ? "Subscribed" : "Not Subscribed";
@@ -64,9 +70,12 @@ function createCard(card) {
 	const p2 = document.createElement("p");
 	p2.textContent = card.locked ? "Locked" : "Unlocked";
 
-	cardContentDiv.appendChild(h3);
+	cardContentDiv.appendChild(asset);
+	cardContentDiv.appendChild(hr);
 	cardContentDiv.appendChild(p);
+	cardContentDiv.appendChild(hr.cloneNode());
 	cardContentDiv.appendChild(p2);
+	cardContentDiv.appendChild(hr.cloneNode());
 
 	cardDiv.appendChild(img);
 	cardDiv.appendChild(cardContentDiv);

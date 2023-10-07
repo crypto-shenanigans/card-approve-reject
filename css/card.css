@@ -1,20 +1,45 @@
 .card {
-    background-color: #fff;
-    border-radius: 2px;
-    display: inline-block;
-    height: 300px;
-    margin: 2.5rem 1rem;
-    position: relative;
-    box-shadow: 0 1px 3px rgba(0,0,0,.2);
-    transition: all .3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+	background: #fff;
+	color: black !important;
+	border-radius: 2px;
+	display: inline-block;
+	margin: 2.5rem 1rem;
+	position: relative;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.card-content {
+	/* margin: 1rem; */
+	width: 100%;
+}
+
+.card-content > hr {
+	width: 200px;
+	margin: 0;
+}
+
+.card-content > div {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.card-content > div:hover {
+    color: var(--background-secondary);
+}
+
+.card-content > h3,
+.card-content > p,
+.card-content > div {
+	margin: 0.5rem;
 }
 
 #card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }

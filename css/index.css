@@ -1,7 +1,7 @@
 :root {
     /* CSS Variables */
-    --background: #121212;
-    --background-secondary: #1d1d1d;
+    --background: #b0c4de;
+    --background-secondary: #343a40;
     --highlight: #1db954;
     --text: #fff;
 }
@@ -11,7 +11,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    color: var(--text);
+    /* color: var(--text); */
 }
 
 body {
